@@ -2,8 +2,36 @@
 
 {% block content %}
 
-{% for category in categories %}
-    {{category}}
-{% endfor %}
+<div class="row justify-content-start row-gap-2">
+    <div class="col-auto">
+        <form method="get" class="d-flex">
+            <input class="form-control me-2" type="number" step="any" name="cdd" placeholder="CDD">
+            <button type="submit" class="btn btn-primary"> Pesquisar </button>
+        </form>
+    </div>
+    <div class="col-auto">
+        <a href="{% url 'create-categories' %}" class="btn btn-outline-success">
+            <i class="bi bi-plus"></i> Criar Categoria
+        </a>
+    </div>
+</div>
+
+<table class="table table-hover table-striped">
+    <thead>
+        <th>ID</th>
+        <th>CDD</th>
+        <th>Descrição</th>
+    </thead>
+    <tbody>
+        {% for category in categories %}
+            <tr>
+                <td> {{category.id}} </td>
+                <td> {{category.cdd}} </td>
+                <td> {{category.description}} </td>
+            </tr>   
+ 
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}
