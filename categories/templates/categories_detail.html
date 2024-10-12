@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card w-auto mb-3 p-3">
+
+  <h2>Ver categoria</h2>
+  
+  <div class="col-lg-6 overflow-auto">
+    <table class="table table-bordered table-striped">
+      <tbody>
+        <tr>
+          <th>ID</th>
+          <td>{{category.id}}</td>
+        </tr>
+        <tr>
+          <th>Nome</th>
+          <td>{{category.name}}</td>
+        </tr>
+        <tr>
+          <th>CDD</th>
+          <td>{% if category.cdd %} {{category.cdd}} {% else %} Não definido {% endif %}</td>
+        </tr>
+        <tr>
+          <th>Descrição</th>
+          <td>{% if category.description %} {{category.description}} {% else %} Não informada {% endif %}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="row row-gap-2 mb-3">
+      <div class="col-auto">
+        <a href="{% url 'update-categories' category.id %}" class="btn btn-info">
+          <i class="bi bi-pencil-square"></i> Atualizar Categoria
+        </a>
+      </div>
+      <div class="col-auto">
+        <a href="{% url 'delete-categories' category.id %}" class="btn btn-danger">
+          <i class="bi bi-trash"></i> Excluir Categoria
+        </a>
+      </div>
+    </div>
+  
+  {% include "components/back_button.html" with back_url="list-categories" text="Voltar para Categorias" %}
+
+</div>
+
+{% endblock %}

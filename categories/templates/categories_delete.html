@@ -5,10 +5,14 @@
 <div class="card w-auto mb-3 p-3">
 
   <form class="form mb-3" method="post">
-    <h2 class="mb-4"> Cadastrar Categoria </h2>
+    <h2 class="card-title mb-4"> Excluir Categoria </h2>
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary"> Cadastrar </button>
+    <p> Deseja excluir permanentemente a
+        categoria <strong>{{category.name}}</strong>?
+        <br>
+        Esta ação é irreversível.
+    </p>
+    <button type="submit" class="btn btn-danger"> Excluir </button>
   </form>
 
   {% include "components/back_button.html" with back_url="list-categories" text="Voltar para Categorias" %}

@@ -6,16 +6,20 @@ class CategoryForm(forms.ModelForm):
 
     class Meta:
         model = Category
-        fields = ['cdd', 'description']
+        fields = ['name', 'cdd', 'description']
         widgets = {
-            'cdd': forms.NumberInput(
-                attrs={'class': 'form-control', 'step': 'any'}
+            'name': forms.TextInput(
+                attrs={'class': 'form-control'}
+            ),
+            'cdd': forms.TextInput(
+                attrs={'class': 'form-control'}
             ),
             'description': forms.Textarea(
                 attrs={'class': 'form-control', 'rows': 3}
             ),
         }
         labels = {
-            'cdd': 'CDD',
-            'description': 'Descrição'
+            'name': 'Nome',
+            'cdd': 'CDD (opcional)',
+            'description': 'Descrição (opcional)'
         }

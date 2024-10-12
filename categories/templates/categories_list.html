@@ -2,36 +2,51 @@
 
 {% block content %}
 
+{{request.dir}}
 <div class="row justify-content-start row-gap-2">
-    <div class="col-auto">
-        <form method="get" class="d-flex">
-            <input class="form-control me-2" type="number" step="any" name="cdd" placeholder="CDD">
-            <button type="submit" class="btn btn-primary"> Pesquisar </button>
-        </form>
-    </div>
-    <div class="col-auto">
-        <a href="{% url 'create-categories' %}" class="btn btn-outline-success">
-            <i class="bi bi-plus"></i> Criar Categoria
-        </a>
-    </div>
+  <div class="col-auto">
+    <form method="get" class="d-flex">
+      <input class="form-control rounded-0 rounded-start-2" value="{{request.GET.name}}" type="text" name="name"
+        placeholder="Nome">
+      <input class="form-control rounded-0" value="{{request.GET.cdd}}" type="text" name="cdd"
+        placeholder="CDD">
+      {% if request.GET.cdd or request.GET.name %}
+      <a href="{% url 'list-categories' %}" class="btn btn-secondary rounded-0">
+        Limpar
+      </a>
+      {% endif %}
+      <button type="submit" class="btn btn-primary rounded-0 rounded-end-2"> Filtrar </button>
+    </form>
+  </div>
+  <div class="col-auto">
+    <a href="{% url 'create-categories' %}" class="btn btn-success">
+      <i class="bi bi-plus"></i> Criar Categoria
+    </a>
+  </div>
 </div>
 
-<table class="table table-hover table-striped">
+{% if categories %}
+  <table class="table table-hover table-striped table-bordered my-3">
     <thead>
-        <th>ID</th>
-        <th>CDD</th>
-        <th>Descrição</th>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>CDD</th>
     </thead>
     <tbody>
-        {% for category in categories %}
-            <tr>
-                <td> {{category.id}} </td>
-                <td> {{category.cdd}} </td>
-                <td> {{category.description}} </td>
-            </tr>   
- 
-        {% endfor %}
+      {% for category in categories %}
+      <tr
+        style="cursor: pointer"
+        onclick="window.location = '{{category.id}}'"
+      >
+        <td> {{category.id}} </td>
+        <td> {{category.name}} </td>
+        <td> {% if category.cdd %} {{category.cdd}} {% else %} Não definido {% endif %} </td>
+      </tr>
+      {% endfor %}
     </tbody>
-</table>
+  </table>
+{% else %}
+  <p class="text-center my-5"> Nenhuma categoria encontrada</p>
+{% endif %}
 
 {% endblock %}
