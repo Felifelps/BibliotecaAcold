@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card w-auto mb-3 p-3">
+
+  <form class="form mb-3" method="post">
+    <h2 class="card-title mb-4"> Excluir Empréstimo </h2>
+    {% csrf_token %}
+    <p> Deseja excluir permanentemente o
+        empréstimo de id <strong>{{loan.id}}</strong>?
+        <br>
+        Esta ação é irreversível.
+    </p>
+    <button type="submit" class="btn btn-danger"> Excluir </button>
+  </form>
+
+  {% include "components/back_button.html" with back_url="list-loans" text="Voltar para Empréstimos" %}
+
+</div>
+
+{% endblock %}

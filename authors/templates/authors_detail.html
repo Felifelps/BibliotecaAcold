@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card w-auto mb-3 p-3">
+
+  <h2>Ver Autor</h2>
+  
+  <div class="col-lg-6 overflow-auto">
+    <table class="table table-bordered table-striped">
+      <tbody>
+        <tr>
+          <th>ID</th>
+          <td>{{author.id}}</td>
+        </tr>
+        <tr>
+          <th>Nome</th>
+          <td>{{author.name}}</td>
+        </tr>
+        <tr>
+          <th>Descrição</th>
+          <td>{% if author.description %} {{author.description}} {% else %} Não informada {% endif %}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="row row-gap-2 mb-3">
+      <div class="col-auto">
+        <a href="{% url 'update-authors' author.id %}" class="btn btn-info">
+          <i class="bi bi-pencil-square"></i> Atualizar Autor
+        </a>
+      </div>
+      <div class="col-auto">
+        <a href="{% url 'delete-authors' author.id %}" class="btn btn-danger">
+          <i class="bi bi-trash"></i> Excluir Autor
+        </a>
+      </div>
+    </div>
+  
+  {% include "components/back_button.html" with back_url="list-authors" text="Voltar para Autores" %}
+
+</div>
+
+{% endblock %}

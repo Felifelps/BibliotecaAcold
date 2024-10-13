@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{{request.dir}}
+<div class="row justify-content-start row-gap-2">
+  <div class="col-auto">
+    <form method="get" class="d-flex">
+      <input class="form-control rounded-0 rounded-start-2" value="{{request.GET.book}}" type="text" name="book"
+        placeholder="Livro">
+      <input class="form-control rounded-0" value="{{request.GET.reader}}" type="text" name="reader"
+        placeholder="Leitor">
+      </select>
+
+      {% if request.GET.book or request.GET.reader%}
+        <a href="{% url 'list-loans' %}" class="btn btn-secondary rounded-0">
+          Limpar
+        </a>
+      {% endif %}
+
+      <button type="submit" class="btn btn-primary rounded-0 rounded-end-2"> Filtrar </button>
+    </form>
+  </div>
+  
+  <div class="col-auto">
+    <a href="{% url 'create-loans' %}" class="btn btn-success">
+      <i class="bi bi-plus"></i> Criar Empréstimo
+    </a>
+  </div>
+</div>
+
+{% if loans %}
+<table class="table table-hover table-striped table-bordered my-3">
+  <thead>
+    <th>ID</th>
+    <th>Livro</th>
+    <th>Leitor</th>
+    <th>Data de empréstimo</th>
+    <th>Data de devolução prevista</th>
+    <th>Data de devolução real</th>
+    <th>Livro devolvido</th>
+  </thead>
+  <tbody>
+    {% for loan in loans %}
+    <tr style="cursor: pointer" onclick="window.location = '{{loan.id}}'">
+      <td> {{loan.id}} </td>
+      <td> {{loan.book}} </td>
+      <td> {{loan.reader}} </td>
+      <td> {{loan.loan_date}} </td>
+      <td> {{loan.expected_return_date}} </td>
+      <td> {% if loan.actual_return_date %} {{loan.actual_return_date}} {% else %} Não informada {% endif %} </td>
+      <td> {% if loan.returned %} Sim {% else %} Não {% endif %} </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% include 'components/pagination.html'%}
+
+{% else %}
+<p class="text-center my-5"> Nenhum empréstimo encontrado</p>
+{% endif %}
+
+{% endblock %}

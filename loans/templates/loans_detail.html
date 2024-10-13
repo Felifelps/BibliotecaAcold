@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card w-auto mb-3 p-3">
+
+  <h2>Ver Empréstimo</h2>
+  
+  <div class="col-lg-6 overflow-auto">
+    <table class="table table-bordered table-striped">
+      <tbody>
+        <tr>
+          <th>ID</th>
+          <td>{{loan.id}}</td>
+        </tr>
+        <tr>
+          <th>Livro</th>
+          <td>{{loan.book}}</td>
+        </tr>
+        <tr>
+          <th>Leitor</th>
+          <td>{{loan.reader}}</td>
+        </tr>
+        <tr>
+          <th>Data de empréstimo</th>
+          <td>{{loan.loan_date}}</td>
+        </tr>
+        <tr>
+          <th>Data de devolução prevista</th>
+          <td>{{loan.expected_return_date}}</td>
+        </tr>
+        <tr>
+          <th>Data de devolução real</th>
+          <td>{{loan.actual_return_date}}</td>
+        </tr>
+        <tr>
+          <th>Livro devolvido</th>
+          <td>{{loan.returned}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="row row-gap-2 mb-3">
+      <div class="col-auto">
+        <a href="{% url 'update-loans' loan.id %}" class="btn btn-info">
+          <i class="bi bi-pencil-square"></i> Atualizar Empréstimo
+        </a>
+      </div>
+      <div class="col-auto">
+        <a href="{% url 'delete-loans' loan.id %}" class="btn btn-danger">
+          <i class="bi bi-trash"></i> Excluir Empréstimo
+        </a>
+      </div>
+    </div>
+  
+  {% include "components/back_button.html" with back_url="list-loans" text="Voltar para Empréstimos" %}
+
+</div>
+
+{% endblock %}

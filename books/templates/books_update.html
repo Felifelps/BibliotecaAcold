@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card w-auto mb-3 p-3">
+
+  <form class="form mb-3" method="post">
+    <h2 class="mb-4"> Atualizar Livro </h2>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-info"> Atualizar </button>
+  </form>
+
+  {% include "components/back_button.html" with back_url="list-books" text="Voltar para Livros" %}
+
+</div>
+
+{% endblock %}

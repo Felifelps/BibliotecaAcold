@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card w-auto mb-3 p-3">
+
+  <h2>Ver Livro</h2>
+  
+  <div class="col-lg-6 overflow-auto">
+    <table class="table table-bordered table-striped">
+      <tbody>
+        <tr>
+          <th>ID</th>
+          <td>{{book.id}}</td>
+        </tr>
+        <tr>
+          <th>Título</th>
+          <td>{{book.title}}</td>
+        </tr>
+        <tr>
+          <th>Autor</th>
+          <td>{{book.author}}</td>
+        </tr>
+        <tr>
+          <th>Categoria</th>
+          <td>{{book.category}}</td>
+        </tr>
+        <tr>
+          <th>Localização</th>
+          <td>{{book.location}}</td>
+        </tr>
+        <tr>
+          <th>Descrição</th>
+          <td>{% if book.description %} {{book.description}} {% else %} Não informada {% endif %}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="row row-gap-2 mb-3">
+      <div class="col-auto">
+        <a href="{% url 'update-books' book.id %}" class="btn btn-info">
+          <i class="bi bi-pencil-square"></i> Atualizar Livro
+        </a>
+      </div>
+      <div class="col-auto">
+        <a href="{% url 'delete-books' book.id %}" class="btn btn-danger">
+          <i class="bi bi-trash"></i> Excluir Livro
+        </a>
+      </div>
+    </div>
+  
+  {% include "components/back_button.html" with back_url="list-books" text="Voltar para Livros" %}
+
+</div>
+
+{% endblock %}

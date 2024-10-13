@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{{request.dir}}
+<div class="row justify-content-start row-gap-2">
+  <div class="col-auto">
+    <form method="get" class="d-flex">
+      <input class="form-control rounded-0 rounded-start-2" value="{{request.GET.name}}" type="text" name="name"
+        placeholder="Nome">
+      {% if request.GET.name %}
+      <a href="{% url 'list-authors' %}" class="btn btn-secondary rounded-0">
+        Limpar
+      </a>
+      {% endif %}
+      <button type="submit" class="btn btn-primary rounded-0 rounded-end-2"> Filtrar </button>
+    </form>
+  </div>
+  <div class="col-auto">
+    <a href="{% url 'create-authors' %}" class="btn btn-success">
+      <i class="bi bi-plus"></i> Criar Autor
+    </a>
+  </div>
+</div>
+
+{% if authors %}
+  <table class="table table-hover table-striped table-bordered my-3">
+    <thead>
+      <th>ID</th>
+      <th>Nome</th>
+    </thead>
+    <tbody>
+      {% for author in authors %}
+      <tr
+        style="cursor: pointer"
+        onclick="window.location = '{{author.id}}'"
+      >
+        <td> {{author.id}} </td>
+        <td> {{author.name}} </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% include 'components/pagination.html'%}
+
+{% else %}
+  <p class="text-center my-5"> Nenhum autor encontrado</p>
+{% endif %}
+
+{% endblock %}
