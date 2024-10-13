@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card w-auto mb-3 p-3">
+
+  <form class="form mb-3" method="post">
+    <h2 class="mb-4"> Cadastrar Leitor </h2>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary"> Cadastrar </button>
+  </form>
+
+  {% include "components/back_button.html" with back_url="list-readers" text="Voltar para Leitores" %}
+
+</div>
+
+{% endblock %}

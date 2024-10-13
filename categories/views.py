@@ -15,6 +15,7 @@ class CategoryListView(ListView):
     model = Category
     template_name = 'categories_list.html'
     context_object_name = 'categories'
+    paginate_by = 10
 
     def get_queryset(self):
         queryset = super().get_queryset()

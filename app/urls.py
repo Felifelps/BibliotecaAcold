@@ -7,8 +7,8 @@ urlpatterns = [
 
     # dashboard path('/', ...),
     path('categories/', include('categories.urls')),
+    path('readers/', include('readers.urls')),
     # path('books/', include('books.urls')),
-    # path('users/', include('users.urls')),
     # path('loans/', include('loans.urls')),
     # path('locations/', include('locations.urls')),
 ]

@@ -8,10 +8,10 @@
     <form method="get" class="d-flex">
       <input class="form-control rounded-0 rounded-start-2" value="{{request.GET.name}}" type="text" name="name"
         placeholder="Nome">
-      <input class="form-control rounded-0" value="{{request.GET.cdd}}" type="text" name="cdd"
-        placeholder="CDD">
-      {% if request.GET.cdd or request.GET.name %}
-      <a href="{% url 'list-categories' %}" class="btn btn-secondary rounded-0">
+      <input class="form-control rounded-0" value="{{request.GET.address}}" type="text" name="address"
+        placeholder="Endereço">
+      {% if request.GET.address or request.GET.name %}
+      <a href="{% url 'list-readers' %}" class="btn btn-secondary rounded-0">
         Limpar
       </a>
       {% endif %}
@@ -19,28 +19,30 @@
     </form>
   </div>
   <div class="col-auto">
-    <a href="{% url 'create-categories' %}" class="btn btn-success">
-      <i class="bi bi-plus"></i> Criar Categoria
+    <a href="{% url 'create-readers' %}" class="btn btn-success">
+      <i class="bi bi-plus"></i> Criar Leitor
     </a>
   </div>
 </div>
 
-{% if categories %}
+{% if readers %}
   <table class="table table-hover table-striped table-bordered my-3">
     <thead>
       <th>ID</th>
       <th>Nome</th>
-      <th>CDD</th>
+      <th>Telefone</th>
+      <th>Endereço</th>
     </thead>
     <tbody>
-      {% for category in categories %}
+      {% for reader in readers %}
       <tr
         style="cursor: pointer"
-        onclick="window.location = '{{category.id}}'"
+        onclick="window.location = '{{reader.id}}'"
       >
-        <td> {{category.id}} </td>
-        <td> {{category.name}} </td>
-        <td> {% if category.cdd %} {{category.cdd}} {% else %} Não definido {% endif %} </td>
+        <td> {{reader.id}} </td>
+        <td> {{reader.name}} </td>
+        <td> {{reader.phone}} </td>
+        <td> {{reader.address}} </td>
       </tr>
       {% endfor %}
     </tbody>
@@ -49,7 +51,7 @@
   {% include 'components/pagination.html'%}
 
 {% else %}
-  <p class="text-center my-5"> Nenhuma categoria encontrada</p>
+  <p class="text-center my-5"> Nenhum leitor encontrado</p>
 {% endif %}
 
 {% endblock %}

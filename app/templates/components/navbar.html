@@ -28,10 +28,10 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link {% if 'users' in request.path %} active {% endif %}"
-            href="#"
+            class="nav-link {% if 'readers' in request.path %} active {% endif %}"
+            href="{% url 'list-readers' %}"
           >
-            Usuários
+            Leitores
           </a>
         </li>
       </ul>
