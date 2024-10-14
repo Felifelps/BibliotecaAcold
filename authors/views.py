@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     ListView,
     CreateView,
@@ -10,7 +11,7 @@ from authors.models import Author
 from authors.forms import AuthorForm
 
 
-class AuthorListView(ListView):
+class AuthorListView(LoginRequiredMixin, ListView):
 
     model = Author
     template_name = 'authors_list.html'
@@ -26,7 +27,7 @@ class AuthorListView(ListView):
         return queryset
 
 
-class AuthorCreateView(CreateView):
+class AuthorCreateView(LoginRequiredMixin, CreateView):
 
     model = Author
     template_name = 'authors_create.html'
@@ -34,14 +35,14 @@ class AuthorCreateView(CreateView):
     success_url = reverse_lazy('list-authors')
 
 
-class AuthorDetailView(DetailView):
+class AuthorDetailView(LoginRequiredMixin, DetailView):
 
     model = Author
     template_name = 'authors_detail.html'
     context_object_name = 'author'
 
 
-class AuthorUpdateView(UpdateView):
+class AuthorUpdateView(LoginRequiredMixin, UpdateView):
 
     model = Author
     template_name = 'authors_update.html'
@@ -49,7 +50,7 @@ class AuthorUpdateView(UpdateView):
     success_url = reverse_lazy('list-authors')
 
 
-class AuthorDeleteView(DeleteView):
+class AuthorDeleteView(LoginRequiredMixin, DeleteView):
 
     model = Author
     template_name = 'authors_delete.html'

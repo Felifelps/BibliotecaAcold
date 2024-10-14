@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     ListView,
     CreateView,
@@ -10,7 +11,7 @@ from locations.models import Location
 from locations.forms import LocationForm
 
 
-class LocationListView(ListView):
+class LocationListView(LoginRequiredMixin, ListView):
 
     model = Location
     template_name = 'locations_list.html'
@@ -26,7 +27,7 @@ class LocationListView(ListView):
         return queryset
 
 
-class LocationCreateView(CreateView):
+class LocationCreateView(LoginRequiredMixin, CreateView):
 
     model = Location
     template_name = 'locations_create.html'
@@ -34,14 +35,14 @@ class LocationCreateView(CreateView):
     success_url = reverse_lazy('list-locations')
 
 
-class LocationDetailView(DetailView):
+class LocationDetailView(LoginRequiredMixin, DetailView):
 
     model = Location
     template_name = 'locations_detail.html'
     context_object_name = 'location'
 
 
-class LocationUpdateView(UpdateView):
+class LocationUpdateView(LoginRequiredMixin, UpdateView):
 
     model = Location
     template_name = 'locations_update.html'
@@ -49,7 +50,7 @@ class LocationUpdateView(UpdateView):
     success_url = reverse_lazy('list-locations')
 
 
-class LocationDeleteView(DeleteView):
+class LocationDeleteView(LoginRequiredMixin, DeleteView):
 
     model = Location
     template_name = 'locations_delete.html'

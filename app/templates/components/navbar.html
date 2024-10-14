@@ -50,6 +50,15 @@
             Localizações
           </a>
         </li>
+        <li class="nav-item">
+          <form action="{% url 'logout' %}" method="post" id="logout-form" class="nav-item">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-link text-decoration-none nav-link align-bottom">
+              <i class="bi bi-box-arrow-right"></i>
+              Sair
+            </button>
+          </form>
+        </li>
       </ul>
     </div>
   </div>

@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     ListView,
     CreateView,
@@ -10,7 +11,7 @@ from readers.models import Reader
 from readers.forms import ReaderForm
 
 
-class ReaderListView(ListView):
+class ReaderListView(LoginRequiredMixin, ListView):
 
     model = Reader
     template_name = 'readers_list.html'
@@ -29,7 +30,7 @@ class ReaderListView(ListView):
         return queryset
 
 
-class ReaderCreateView(CreateView):
+class ReaderCreateView(LoginRequiredMixin, CreateView):
 
     model = Reader
     template_name = 'readers_create.html'
@@ -37,14 +38,14 @@ class ReaderCreateView(CreateView):
     success_url = reverse_lazy('list-readers')
 
 
-class ReaderDetailView(DetailView):
+class ReaderDetailView(LoginRequiredMixin, DetailView):
 
     model = Reader
     template_name = 'readers_detail.html'
     context_object_name = 'reader'
 
 
-class ReaderUpdateView(UpdateView):
+class ReaderUpdateView(LoginRequiredMixin, UpdateView):
 
     model = Reader
     template_name = 'readers_update.html'
@@ -52,7 +53,7 @@ class ReaderUpdateView(UpdateView):
     success_url = reverse_lazy('list-readers')
 
 
-class ReaderDeleteView(DeleteView):
+class ReaderDeleteView(LoginRequiredMixin, DeleteView):
 
     model = Reader
     template_name = 'readers_delete.html'

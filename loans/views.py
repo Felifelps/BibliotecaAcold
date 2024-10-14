@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     ListView,
     CreateView,
@@ -6,13 +7,11 @@ from django.views.generic import (
     DeleteView
 )
 from django.urls import reverse_lazy
-from books.models import Book
 from loans.models import Loan
 from loans.forms import LoanForm
-from readers.models import Reader
 
 
-class LoanListView(ListView):
+class LoanListView(LoginRequiredMixin, ListView):
 
     model = Loan
     template_name = 'loans_list.html'
@@ -31,7 +30,7 @@ class LoanListView(ListView):
         return queryset
 
 
-class LoanCreateView(CreateView):
+class LoanCreateView(LoginRequiredMixin, CreateView):
 
     model = Loan
     template_name = 'loans_create.html'
@@ -39,14 +38,14 @@ class LoanCreateView(CreateView):
     success_url = reverse_lazy('list-loans')
 
 
-class LoanDetailView(DetailView):
+class LoanDetailView(LoginRequiredMixin, DetailView):
 
     model = Loan
     template_name = 'loans_detail.html'
     context_object_name = 'loan'
 
 
-class LoanUpdateView(UpdateView):
+class LoanUpdateView(LoginRequiredMixin, UpdateView):
 
     model = Loan
     template_name = 'loans_update.html'
@@ -54,7 +53,7 @@ class LoanUpdateView(UpdateView):
     success_url = reverse_lazy('list-loans')
 
 
-class LoanDeleteView(DeleteView):
+class LoanDeleteView(LoginRequiredMixin, DeleteView):
 
     model = Loan
     template_name = 'loans_delete.html'
