@@ -6,27 +6,22 @@
 
 {{request.dir}}
 <div class="row justify-content-start row-gap-2">
-  <div class="col-auto">
-    <form method="get" class="d-flex">
-      <input class="form-control rounded-0 rounded-start-2" value="{{request.GET.title}}" type="text" name="title"
-        placeholder="Título">
-      <input class="form-control rounded-0" value="{{request.GET.author}}" type="text" name="author"
-        placeholder="Autor">
-      <input class="form-control rounded-0" value="{{request.GET.category}}" type="text" name="category"
-        placeholder="Categoria">
-      <input class="form-control rounded-0" value="{{request.GET.location}}" type="text" name="location"
-        placeholder="Localização">
-      
+  <form method="get" class="col-auto">
+    <div class="input-group">
       {% if request.GET.title or request.GET.author or request.GET.category or request.GET.location %}
-        <a href="{% url 'list-books' %}" class="btn btn-secondary rounded-0">
-          Limpar
-        </a>
+      <a href="{% url 'list-books' %}" class="btn btn-secondary">
+        <i class="bi bi-x"></i>
+      </a>
       {% endif %}
+      <input class="form-control" value="{{request.GET.title}}" type="text" name="title" placeholder="Título">
+      <input class="form-control" value="{{request.GET.author}}" type="text" name="author" placeholder="Autor">
+      <input class="form-control" value="{{request.GET.category}}" type="text" name="category" placeholder="Categoria">
+      <input class="form-control" value="{{request.GET.location}}" type="text" name="location"
+        placeholder="Localização">
+      <button type="submit" class="btn btn-primary"> Filtrar </button>
+    </div>
+  </form>
 
-      <button type="submit" class="btn btn-primary rounded-0 rounded-end-2"> Filtrar </button>
-    </form>
-  </div>
-  
   <div class="col-auto">
     <a href="{% url 'create-books' %}" class="btn btn-success">
       <i class="bi bi-plus"></i> Criar Livro
@@ -35,26 +30,28 @@
 </div>
 
 {% if books %}
-<table class="table table-hover table-striped table-bordered my-3">
-  <thead>
-    <th>ID</th>
-    <th>Título</th>
-    <th>Autor</th>
-    <th>Categoria</th>
-    <th>Localização</th>
-  </thead>
-  <tbody>
-    {% for book in books %}
-    <tr style="cursor: pointer" onclick="window.location = '{{book.id}}'">
-      <td> {{book.id}} </td>
-      <td> {{book.title}} </td>
-      <td> {{book.author}} </td>
-      <td> {{book.category}} </td>
-      <td> {{book.location}} </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="overflow-x-auto">
+  <table class="table table-hover table-striped table-bordered my-3">
+    <thead>
+      <th>ID</th>
+      <th>Título</th>
+      <th>Autor</th>
+      <th>Categoria</th>
+      <th>Localização</th>
+    </thead>
+    <tbody>
+      {% for book in books %}
+      <tr style="cursor: pointer" onclick="window.location = '{{book.id}}'">
+        <td> {{book.id}} </td>
+        <td> {{book.title}} </td>
+        <td> {{book.author}} </td>
+        <td> {{book.category}} </td>
+        <td> {{book.location}} </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
 {% include 'components/pagination.html'%}
 

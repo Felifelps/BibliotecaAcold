@@ -6,20 +6,20 @@
 
 {{request.dir}}
 <div class="row justify-content-start row-gap-2">
-  <div class="col-auto">
-    <form method="get" class="d-flex">
-      <input class="form-control rounded-0 rounded-start-2" value="{{request.GET.name}}" type="text" name="name"
+  <form method="get" class="col-auto">
+      <div class="input-group">
+        {% if request.GET.address or request.GET.name %}
+        <a href="{% url 'list-readers' %}" class="btn btn-secondary input-group-text">
+          <i class="bi bi-x"></i>
+        </a>
+        {% endif %}
+        <input class="form-control" value="{{request.GET.name}}" type="text" name="name"
         placeholder="Nome">
-      <input class="form-control rounded-0" value="{{request.GET.address}}" type="text" name="address"
+        <input class="form-control" value="{{request.GET.address}}" type="text" name="address"
         placeholder="Endereço">
-      {% if request.GET.address or request.GET.name %}
-      <a href="{% url 'list-readers' %}" class="btn btn-secondary rounded-0">
-        Limpar
-      </a>
-      {% endif %}
-      <button type="submit" class="btn btn-primary rounded-0 rounded-end-2"> Filtrar </button>
-    </form>
-  </div>
+        <button type="submit" class="btn btn-primary"> Filtrar </button>
+    </div>
+  </form>
   <div class="col-auto">
     <a href="{% url 'create-readers' %}" class="btn btn-success">
       <i class="bi bi-plus"></i> Criar Leitor
@@ -28,6 +28,7 @@
 </div>
 
 {% if readers %}
+<div class="overflow-x-auto">
   <table class="table table-hover table-striped table-bordered my-3">
     <thead>
       <th>ID</th>
@@ -37,10 +38,7 @@
     </thead>
     <tbody>
       {% for reader in readers %}
-      <tr
-        style="cursor: pointer"
-        onclick="window.location = '{{reader.id}}'"
-      >
+      <tr style="cursor: pointer" onclick="window.location = '{{reader.id}}'">
         <td> {{reader.id}} </td>
         <td> {{reader.name}} </td>
         <td> {{reader.phone}} </td>
@@ -49,11 +47,12 @@
       {% endfor %}
     </tbody>
   </table>
+</div>
 
-  {% include 'components/pagination.html'%}
+{% include 'components/pagination.html'%}
 
 {% else %}
-  <p class="text-center my-5"> Nenhum leitor encontrado</p>
+<p class="text-center my-5"> Nenhum leitor encontrado</p>
 {% endif %}
 
 {% endblock %}

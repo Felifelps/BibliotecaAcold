@@ -6,18 +6,18 @@
 
 {{request.dir}}
 <div class="row justify-content-start row-gap-2">
-  <div class="col-auto">
-    <form method="get" class="d-flex">
-      <input class="form-control rounded-0 rounded-start-2" value="{{request.GET.name}}" type="text" name="name"
-        placeholder="Nome">
+  <form method="get" class="col-auto">
+    <div class="input-group">
       {% if request.GET.name %}
-      <a href="{% url 'list-locations' %}" class="btn btn-secondary rounded-0">
-        Limpar
+      <a href="{% url 'list-locations' %}" class="btn btn-secondary">
+        <i class="bi bi-x"></i>
       </a>
       {% endif %}
-      <button type="submit" class="btn btn-primary rounded-0 rounded-end-2"> Filtrar </button>
-    </form>
-  </div>
+      <input class="form-control" value="{{request.GET.name}}" type="text" name="name"
+        placeholder="Nome">
+      <button type="submit" class="btn btn-primary"> Filtrar </button>
+    </div>
+  </form>
   <div class="col-auto">
     <a href="{% url 'create-locations' %}" class="btn btn-success">
       <i class="bi bi-plus"></i> Criar Localização
@@ -26,28 +26,27 @@
 </div>
 
 {% if locations %}
-  <table class="table table-hover table-striped table-bordered my-3">
+<div class="overflow-x-auto">
+  <table class="overflow-auto table table-hover table-striped table-bordered my-3">
     <thead>
       <th>ID</th>
       <th>Nome</th>
     </thead>
     <tbody>
       {% for location in locations %}
-      <tr
-        style="cursor: pointer"
-        onclick="window.location = '{{location.id}}'"
-      >
+      <tr style="cursor: pointer" onclick="window.location = '{{location.id}}'">
         <td> {{location.id}} </td>
         <td> {{location.name}} </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+</div>
 
-  {% include 'components/pagination.html'%}
+{% include 'components/pagination.html'%}
 
 {% else %}
-  <p class="text-center my-5"> Nenhuma localização encontrada</p>
+<p class="text-center my-5"> Nenhuma localização encontrada</p>
 {% endif %}
 
 {% endblock %}

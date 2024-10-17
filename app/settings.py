@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-$y5()r-h5p#3sbgcml&j6lw2uk1u=!^xc_dc6ahq-8y3lz#dml
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['bibliotecaacold.onrender.com']
+ALLOWED_HOSTS = [os.getenv('ALLOWED_HOST'), 'bibliotecaacold.onrender.com']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'app',
     'authors',
     'books',
     'categories',
@@ -126,7 +127,7 @@ USE_I18N = True
 USE_TZ = True
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = '/loans/' 
+LOGIN_REDIRECT_URL = '/loans/'
 LOGOUT_REDIRECT_URL = '/login/'
 
 # Static files (CSS, JavaScript, Images)

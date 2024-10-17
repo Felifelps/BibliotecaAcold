@@ -6,24 +6,25 @@
 
 {{request.dir}}
 <div class="row justify-content-start row-gap-2">
-  <div class="col-auto">
-    <form method="get" class="d-flex">
-      <input class="form-control rounded-0 rounded-start-2" value="{{request.GET.book}}" type="text" name="book"
-        placeholder="Livro">
-      <input class="form-control rounded-0" value="{{request.GET.reader}}" type="text" name="reader"
-        placeholder="Leitor">
-      </select>
-
+  <form method="get" class="col-auto">
+    <div class="input-group">
       {% if request.GET.book or request.GET.reader%}
-        <a href="{% url 'list-loans' %}" class="btn btn-secondary rounded-0">
-          Limpar
-        </a>
+      <a href="{% url 'list-loans' %}" class="btn btn-secondary">
+        <i class="bi bi-x"></i>
+      </a>
       {% endif %}
+      <input class="form-control" value="{{request.GET.book}}" type="text" name="book"
+        placeholder="Livro">
+      <input class="form-control" value="{{request.GET.reader}}" type="text" name="reader"
+        placeholder="Leitor">
+      <input class="form-control" value="{{request.GET.start_date}}" type="date" name="start_date"
+        placeholder="Data de Início">
+      <input class="form-control" value="{{request.GET.final_date}}" type="date" name="final_date"
+        placeholder="Data Final">
+      <button type="submit" class="btn btn-primary"> Filtrar </button>
+    </div>
+  </form>
 
-      <button type="submit" class="btn btn-primary rounded-0 rounded-end-2"> Filtrar </button>
-    </form>
-  </div>
-  
   <div class="col-auto">
     <a href="{% url 'create-loans' %}" class="btn btn-success">
       <i class="bi bi-plus"></i> Criar Empréstimo
@@ -32,30 +33,32 @@
 </div>
 
 {% if loans %}
-<table class="table table-hover table-striped table-bordered my-3">
-  <thead>
-    <th>ID</th>
-    <th>Livro</th>
-    <th>Leitor</th>
-    <th>Data de empréstimo</th>
-    <th>Data de devolução prevista</th>
-    <th>Data de devolução real</th>
-    <th>Livro devolvido</th>
-  </thead>
-  <tbody>
-    {% for loan in loans %}
-    <tr style="cursor: pointer" onclick="window.location = '{{loan.id}}'">
-      <td> {{loan.id}} </td>
-      <td> {{loan.book}} </td>
-      <td> {{loan.reader}} </td>
-      <td> {{loan.loan_date}} </td>
-      <td> {{loan.expected_return_date}} </td>
-      <td> {% if loan.actual_return_date %} {{loan.actual_return_date}} {% else %} Não informada {% endif %} </td>
-      <td> {% if loan.returned %} Sim {% else %} Não {% endif %} </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="overflow-x-auto">
+  <table class="table table-hover table-striped table-bordered my-3">
+    <thead>
+      <th>ID</th>
+      <th>Livro</th>
+      <th>Leitor</th>
+      <th>Data de empréstimo</th>
+      <th>Data de devolução prevista</th>
+      <th>Data de devolução real</th>
+      <th>Livro devolvido</th>
+    </thead>
+    <tbody>
+      {% for loan in loans %}
+      <tr style="cursor: pointer" onclick="window.location = '{{loan.id}}'">
+        <td> {{loan.id}} </td>
+        <td> {{loan.book}} </td>
+        <td> {{loan.reader}} </td>
+        <td> {{loan.loan_date}} </td>
+        <td> {{loan.expected_return_date}} </td>
+        <td> {% if loan.actual_return_date %} {{loan.actual_return_date}} {% else %} Não informada {% endif %} </td>
+        <td> {% if loan.returned %} Sim {% else %} Não {% endif %} </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
 {% include 'components/pagination.html'%}
 

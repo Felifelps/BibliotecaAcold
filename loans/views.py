@@ -1,3 +1,4 @@
+from datetime import date
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     ListView,
@@ -26,6 +27,14 @@ class LoanListView(LoginRequiredMixin, ListView):
 
         if (reader := self.request.GET.get('reader')):
             queryset = queryset.filter(reader__name__icontains=reader)
+
+        if (start_date := self.request.GET.get('start_date')):
+            start_date = date.fromisoformat(start_date)
+            queryset = queryset.filter(loan_date__gte=start_date)
+
+        if (end_date := self.request.GET.get('end_date')):
+            end_date = date.fromisoformat(end_date)
+            queryset = queryset.filter(loan_date__lte=end_date)
 
         return queryset
 
