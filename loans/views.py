@@ -25,7 +25,7 @@ class LoanListView(LoginRequiredMixin, ListView):
             queryset = queryset.filter(book__title__icontains=book)
 
         if (reader := self.request.GET.get('reader')):
-            queryset = queryset.filter(reader__title__icontains=reader)
+            queryset = queryset.filter(reader__name__icontains=reader)
 
         return queryset
 
