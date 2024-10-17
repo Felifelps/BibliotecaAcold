@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-$y5()r-h5p#3sbgcml&j6lw2uk1u=!^xc_dc6ahq-8y3lz#dml
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://bibliotecaacold.onrender.com']
 
 
 # Application definition
