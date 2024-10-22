@@ -20,6 +20,10 @@
           <td>{{book.title}}</td>
         </tr>
         <tr>
+          <th>Quantidade</th>
+          <td>{{book.quantity}}</td>
+        </tr>
+        <tr>
           <th>Autor</th>
           <td>{{book.author}}</td>
         </tr>
@@ -30,6 +34,10 @@
         <tr>
           <th>Localização</th>
           <td>{{book.location}}</td>
+        </tr>
+        <tr>
+          <th>Data de publicação</th>
+          <td>{% if book.publication_date %} {{book.publication_date}} {% else %} Não informada {% endif %}</td>
         </tr>
         <tr>
           <th>Descrição</th>

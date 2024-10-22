@@ -6,10 +6,13 @@ class BookForm(forms.ModelForm):
 
     class Meta:
         model = Book
-        fields = ['title', 'author', 'category', 'location', 'publication_date', 'description']
+        fields = ['title', 'quantity', 'author', 'category', 'location', 'publication_date', 'description']
         widgets = {
             'title': forms.TextInput(
                 attrs={'class': 'form-control'}
+            ),
+            'quantity': forms.NumberInput(
+                attrs={'class': 'form-control', 'value': 0}
             ),
             'author': forms.Select(
                 attrs={'class': 'form-control'}
@@ -20,7 +23,7 @@ class BookForm(forms.ModelForm):
             'location': forms.Select(
                 attrs={'class': 'form-control'}
             ),
-            'publication_date': forms.TextInput(
+            'publication_date': forms.DateInput(
                 attrs={'class': 'form-control'}
             ),
             'description': forms.Textarea(
@@ -28,7 +31,8 @@ class BookForm(forms.ModelForm):
             ),
         }
         labels = {
-            'title': 'Nome',
+            'title': 'Título',
+            'quantity': 'Quantidade',
             'author': 'Autor',
             'category': 'Categoria',
             'location': 'Localização',

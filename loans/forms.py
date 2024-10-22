@@ -49,6 +49,7 @@ class LoanForm(forms.ModelForm):
                 check_test=lambda value: value,
                 attrs={
                     'type': 'checkbox',
+                    'class': 'form-check-input'
                 }
             ),
         }

@@ -18,7 +18,7 @@
       <input class="form-control" value="{{request.GET.category}}" type="text" name="category" placeholder="Categoria">
       <input class="form-control" value="{{request.GET.location}}" type="text" name="location"
         placeholder="Localização">
-      <button type="submit" class="btn btn-primary"> Filtrar </button>
+      <button type="submit" class="btn btn-primary"> <i class="bi bi-search"></i> </button>
     </div>
   </form>
 
@@ -38,6 +38,7 @@
       <th>Autor</th>
       <th>Categoria</th>
       <th>Localização</th>
+      <th>Quantidade</th>
     </thead>
     <tbody>
       {% for book in books %}
@@ -47,6 +48,7 @@
         <td> {{book.author}} </td>
         <td> {{book.category}} </td>
         <td> {{book.location}} </td>
+        <td> {{book.quantity}} </td>
       </tr>
       {% endfor %}
     </tbody>

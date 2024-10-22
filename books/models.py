@@ -8,6 +8,7 @@ class Book(models.Model):
 
     title = models.CharField(max_length=100)
     publication_date = models.DateField(blank=True, null=True)
+    quantity = models.IntegerField()
     author = models.ForeignKey(
         Author,
         on_delete=models.PROTECT,

@@ -28,13 +28,12 @@ class LoanListView(LoginRequiredMixin, ListView):
         if (reader := self.request.GET.get('reader')):
             queryset = queryset.filter(reader__name__icontains=reader)
 
-        if (start_date := self.request.GET.get('start_date')):
-            start_date = date.fromisoformat(start_date)
-            queryset = queryset.filter(loan_date__gte=start_date)
+        if (loan_date := self.request.GET.get('loan_date')):
+            loan_date = date.fromisoformat(loan_date)
+            queryset = queryset.filter(loan_date=loan_date)
 
-        if (end_date := self.request.GET.get('end_date')):
-            end_date = date.fromisoformat(end_date)
-            queryset = queryset.filter(loan_date__lte=end_date)
+        if (was_returned := self.request.GET.get('was_returned')):
+            queryset = queryset.filter(returned=was_returned == '1')
 
         return queryset
 

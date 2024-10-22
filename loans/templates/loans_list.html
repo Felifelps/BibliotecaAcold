@@ -8,7 +8,7 @@
 <div class="row justify-content-start row-gap-2">
   <form method="get" class="col-auto">
     <div class="input-group">
-      {% if request.GET.book or request.GET.reader%}
+      {% if request.GET.book or request.GET.reader or request.GET.loan_date or request.GET.was_returned %}
       <a href="{% url 'list-loans' %}" class="btn btn-secondary">
         <i class="bi bi-x"></i>
       </a>
@@ -17,11 +17,14 @@
         placeholder="Livro">
       <input class="form-control" value="{{request.GET.reader}}" type="text" name="reader"
         placeholder="Leitor">
-      <input class="form-control" value="{{request.GET.start_date}}" type="date" name="start_date"
-        placeholder="Data de Início">
-      <input class="form-control" value="{{request.GET.final_date}}" type="date" name="final_date"
-        placeholder="Data Final">
-      <button type="submit" class="btn btn-primary"> Filtrar </button>
+      <input class="form-control" value="{{request.GET.loan_date}}" type="date" name="loan_date"
+        placeholder="Data de empréstimo">
+      <select class="form-select" name="was_returned">
+        <option value="" {% if not request.GET.was_returned %} selected {% endif %}> ----- </option>
+        <option value="1" {% if request.GET.was_returned == "1" %} selected {% endif %}> Devolvidos </option>
+        <option value="0" {% if request.GET.was_returned == "0" %} selected {% endif %}> Não Devolvidos </option>
+      </select>
+      <button type="submit" class="btn btn-primary"> <i class="bi bi-search"></i> </button>
     </div>
   </form>
 
@@ -39,10 +42,10 @@
       <th>ID</th>
       <th>Livro</th>
       <th>Leitor</th>
+      <th>Livro devolvido</th>
       <th>Data de empréstimo</th>
       <th>Data de devolução prevista</th>
       <th>Data de devolução real</th>
-      <th>Livro devolvido</th>
     </thead>
     <tbody>
       {% for loan in loans %}
@@ -50,10 +53,10 @@
         <td> {{loan.id}} </td>
         <td> {{loan.book}} </td>
         <td> {{loan.reader}} </td>
+        <td> {% if loan.returned %} Sim {% else %} Não {% endif %} </td>
         <td> {{loan.loan_date}} </td>
         <td> {{loan.expected_return_date}} </td>
         <td> {% if loan.actual_return_date %} {{loan.actual_return_date}} {% else %} Não informada {% endif %} </td>
-        <td> {% if loan.returned %} Sim {% else %} Não {% endif %} </td>
       </tr>
       {% endfor %}
     </tbody>
