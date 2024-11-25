@@ -19,7 +19,7 @@ class AuthorListView(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = super().get_queryset().order_by('created_at')
 
         if (name := self.request.GET.get('name')):
             queryset = queryset.filter(name__icontains=name)

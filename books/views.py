@@ -19,7 +19,7 @@ class BookListView(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = super().get_queryset().order_by('created_at')
 
         if (title := self.request.GET.get('title')):
             queryset = queryset.filter(title__icontains=title)
