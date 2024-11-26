@@ -8,13 +8,14 @@
 <div class="row justify-content-start row-gap-2">
   <form method="get" class="col-auto">
     <div class="input-group">
-      {% if request.GET.title or request.GET.author or request.GET.category or request.GET.location %}
+      {% if request.GET.title or request.GET.author or request.GET.publisher or request.GET.category or request.GET.location %}
       <a href="{% url 'list-books' %}" class="btn btn-secondary">
         <i class="bi bi-x"></i>
       </a>
       {% endif %}
       <input class="form-control" value="{{request.GET.title}}" type="text" name="title" placeholder="Título">
       <input class="form-control" value="{{request.GET.author}}" type="text" name="author" placeholder="Autor">
+      <input class="form-control" value="{{request.GET.publisher}}" type="text" name="publisher" placeholder="Editora">
       <input class="form-control" value="{{request.GET.category}}" type="text" name="category" placeholder="Categoria">
       <input class="form-control" value="{{request.GET.location}}" type="text" name="location"
         placeholder="Localização">
@@ -37,6 +38,7 @@
       <th>Título</th>
       <th>Autor</th>
       <th>Categoria</th>
+      <th>Editora</th>
       <th>Localização</th>
       <th>Quantidade</th>
     </thead>
@@ -47,6 +49,7 @@
         <td> {{book.title}} </td>
         <td> {{book.author}} </td>
         <td> {{book.category}} </td>
+        <td> {% if book.publisher %} {{book.publisher}} {% else %} Não informada {% endif %} </td>
         <td> {{book.location}} </td>
         <td> {{book.quantity}} </td>
       </tr>
