@@ -14,5 +14,6 @@ def activate_db(request):
         count = Category.objects.count()
         content = f"Activated succesfully ({count})!"
     except Exception as e:
+        print(e)
         content = f"An error ocurred ({datetime.now()})"
     return HttpResponse(content=content)
