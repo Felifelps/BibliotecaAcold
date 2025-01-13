@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from categories.models import Category
@@ -9,7 +10,9 @@ def home(request):
 
 
 def activate_db(request):
-    count = Category.objects.count()
-    return HttpResponse(
-        content=f"Activated succesfully ({count})!"
-    )
+    try:
+        count = Category.objects.count()
+        content = f"Activated succesfully ({count})!"
+    except Exception as e:
+        content = f"An error ocurred ({datetime.now()})"
+    return HttpResponse(content=content)
