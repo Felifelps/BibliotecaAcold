@@ -33,6 +33,9 @@ class BookListView(LoginRequiredMixin, ListView):
         if (location := self.request.GET.get('location')):
             queryset = queryset.filter(location__name__icontains=location)
 
+        if (publisher := self.request.GET.get('publisher')):
+            queryset = queryset.filter(publisher__name__icontains=publisher)
+
         return queryset
 
 

@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Author(models.Model):
+class Publisher(models.Model):
 
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
@@ -13,5 +13,3 @@ class Author(models.Model):
 
     def __str__(self):
         return str(self.name)
-
-    
