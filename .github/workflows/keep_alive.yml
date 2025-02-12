@@ -2,7 +2,7 @@ name: Keep Alive
 
 on:
   schedule:
-    - cron: "0 0 */2 *" # A cada dois dias, à meia noite
+    - cron: "0 0 */2 * *" # A cada dois dias, à meia noite
 
 jobs:
   keep_alive:
