@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Keep alive"
-        run: curl -L "${{ secrets.ACTIVATE_APPLICATION_DB_URL }}"
+        run: curl -L "${{secrets.ACTIVATE_APPLICATION_DB_URL}}"
