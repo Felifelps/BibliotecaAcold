@@ -28,6 +28,10 @@
           <td>{{book.author}}</td>
         </tr>
         <tr>
+          <th>Editora</th>
+          <td>{% if book.publisher %} {{book.publisher}} {% else %} Não informada {% endif %}</td>
+        </tr>
+        <tr>
           <th>Categoria</th>
           <td>{{book.category}}</td>
         </tr>

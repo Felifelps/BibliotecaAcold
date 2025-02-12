@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} Biblioteca Acold - Editora {% endblock %}
+
+{% block content %}
+
+<div class="card w-auto mb-3 p-3">
+
+  <form class="form mb-3" method="post">
+    <h2 class="mb-4"> Atualizar Editora </h2>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-info"> Atualizar </button>
+  </form>
+
+  {% include "components/back_button.html" with back_url="list-publishers" text="Voltar para Editora" %}
+
+</div>
+
+{% endblock %}

@@ -16,4 +16,5 @@ urlpatterns = [
     path('loans/', include('loans.urls')),
     path('locations/', include('locations.urls')),
     path('readers/', include('readers.urls')),
+    path('publishers/', include('publishers.urls')),
 ]

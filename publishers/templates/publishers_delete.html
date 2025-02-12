@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} Biblioteca Acold - Editoras {% endblock %}
+
+{% block content %}
+
+<div class="card w-auto mb-3 p-3">
+
+  <form class="form mb-3" method="post">
+    <h2 class="card-title mb-4"> Excluir Editora </h2>
+    {% csrf_token %}
+    <p> Deseja excluir permanentemente o
+      editora <strong>{{publisher.name}}</strong>?
+      <br>
+      Esta ação é irreversível.
+    </p>
+    <button type="submit" class="btn btn-danger"> Excluir </button>
+  </form>
+
+  {% include "components/back_button.html" with back_url="list-publishers" text="Voltar para Editoras" %}
+
+</div>
+
+{% endblock %}
