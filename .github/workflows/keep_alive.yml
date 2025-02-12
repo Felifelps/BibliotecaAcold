@@ -1,0 +1,12 @@
+name: Keep Alive
+
+on:
+  schedule:
+    - cron: "0 0 */2 *" # A cada dois dias, à meia noite
+
+jobs:
+  keep_alive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Keep alive"
+        run: curl -L "${{ secrets.ACTIVATE_APPLICATION_DB_URL }}"
