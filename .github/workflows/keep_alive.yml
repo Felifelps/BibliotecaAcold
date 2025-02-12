@@ -3,6 +3,11 @@ name: Keep Alive
 on:
   schedule:
     - cron: "0 0 */2 * *" # A cada dois dias, à meia noite
+  workflow_dispatch:
+    inputs:
+      test:
+        description: "Forçar execução"
+        required: false
 
 jobs:
   keep_alive:
