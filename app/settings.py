@@ -91,6 +91,9 @@ DATABASES = {
         'HOST': config('DB_HOST'),
         'PASSWORD': config('DB_PASSWORD'),
         'PORT': config('DB_PORT'),
+    } if not DEBUG else {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     },
 }
 

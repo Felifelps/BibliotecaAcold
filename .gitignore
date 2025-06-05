@@ -3,4 +3,5 @@ db.sqlite3
 .env
 static
 **/__pycache__
+**.csv
 .extra
