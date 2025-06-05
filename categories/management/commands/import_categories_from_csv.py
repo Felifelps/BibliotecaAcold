@@ -14,10 +14,9 @@ class Command(BaseCommand):
         )
 
         parser.add_argument(
-            'delete_existing',
-            type=bool,
-            default=False,
-            help='Deletar dados existentes antes de importar novos?'
+            '--delete-existing',
+            action='store_true',
+            help='Deletar dados existentes antes de importar novos'
         )
 
     def handle(self, *args, **options):
