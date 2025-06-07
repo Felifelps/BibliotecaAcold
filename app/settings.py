@@ -28,6 +28,7 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 DEBUG = config('DJANGO_DEBUG')
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS').split(',')
+CSRF_TRUSTED_ORIGINS = [f"https://{host}" for host in ALLOWED_HOSTS]
 
 # Application definition
 
