@@ -29,41 +29,28 @@ O repositório contém diversos arquivos e diretórios, organizados de acordo co
 * **`wsgi.py`**: Configurações WSGI para o projeto.
 * **`app/settings.py`**: Configurações do projeto Django.
 
+## Instalação
 
-## Instruções de Configuração e Execução
+Para rodar o projeto basta ter o Git e o Python 3.x instalados.
 
-1. **Ambiente Virtual:** Crie um ambiente virtual Python.
-2. **Instalação das dependências:**
+1. Clone o repositório:
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+```bash
+git clone https://github.com/Felifelps/BibliotecaAcold
+cd bibliotecaacold
+```
 
-3. **Configuração do Django:**
-   Configure as variáveis de ambiente necessárias no arquivo `app/settings.py`, incluindo:
-    * `SECRET_KEY`
-    * `DATABASE_NAME`, `DATABASE_USER`, `DATABASE_PASSWORD`, `DATABASE_HOST`, `DATABASE_PORT`
-    * `ALLOWED_HOST`
-    * `ENVIRONMENT` (para definir o modo de debug)
-4. **Migração do banco de dados:**
+2. Rode o script de instalação:
 
-   ```bash
-   python manage.py migrate
-   ```
+```bash
+python setup.py
+```
 
-5. **Execução do servidor:**
-
-   ```bash
-   python manage.py runserver
-   ```
-
-   Acesse a aplicação no seu navegador usando `http://127.0.0.1:8000/`.
-
+3. Acesse a aplicação no seu navegador usando `http://127.0.0.1:8000/`.
 
 ## Exemplos de Uso
 
 Para cada modelo (Autores, Livros, Categorias, etc.), existem exemplos de uso em `app/views.py`. Os templates HTML mostram como os dados são exibidos e manipulados.
-
 
 ## Requisitos
 
